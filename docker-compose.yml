@@ -6,7 +6,7 @@ services:
     container_name: mha_node0
     restart: always
     networks:
-      net1:
+      mysql-net:
         ipv4_address: 10.5.0.10
     ports:
       - "33060:3306"
@@ -26,7 +26,7 @@ services:
     depends_on:
       - mha_master
     networks:
-      net1:
+      mysql-net:
         ipv4_address: 10.5.0.11
     ports:
       - "33061:3306"
@@ -45,7 +45,7 @@ services:
       - mha_master
     restart: always
     networks:
-      net1:
+      mysql-net:
         ipv4_address: 10.5.0.12
     ports:
       - "33062:3306"
@@ -67,7 +67,7 @@ services:
       - mha_slave2
     restart: always
     networks:
-      net1:
+      mysql-net:
         ipv4_address: 10.5.0.9
     volumes:
       - "./volumes/mha_share/:/root/mha_share/"
@@ -79,7 +79,7 @@ services:
     environment:
       - CONTAINER_NAME=mha_manager
 networks:
-  net1:
+  mysql-net:
     driver: bridge
     ipam:
       config:
