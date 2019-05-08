@@ -1,0 +1,86 @@
+version: "3.7"
+services:
+
+  mha_master:
+    image: mha4mysql-node:latest
+    container_name: mha_node0
+    restart: always
+    networks:
+      net1:
+        ipv4_address: 10.5.0.10
+    ports:
+      - "33060:3306"
+    volumes:
+      - "./volumes/mha_share/:/root/mha_share/"
+      - "./volumes/mha_node0/lib/:/var/lib/mysql/"
+      - "./volumes/mha_node0/conf/:/etc/mysql/conf.d/"
+    env_file:
+      - ./parameters.env
+    environment:
+      - CONTAINER_NAME=mha_node0
+
+  mha_slave1:
+    image: mha4mysql-node:latest
+    container_name: mha_node1
+    restart: always
+    depends_on:
+      - mha_master
+    networks:
+      net1:
+        ipv4_address: 10.5.0.11
+    ports:
+      - "33061:3306"
+    volumes:
+      - "./volumes/mha_share/:/root/mha_share/"
+      - "./volumes/mha_node1/lib/:/var/lib/mysql/"
+      - "./volumes/mha_node1/conf/:/etc/mysql/conf.d/"
+    env_file:
+      - ./parameters.env
+    environment:
+      - CONTAINER_NAME=mha_node1
+  mha_slave2:
+    image: mha4mysql-node:latest
+    container_name: mha_node2
+    depends_on:
+      - mha_master
+    restart: always
+    networks:
+      net1:
+        ipv4_address: 10.5.0.12
+    ports:
+      - "33062:3306"
+    volumes:
+      - "./volumes/mha_share/:/root/mha_share/"
+      - "./volumes/mha_node2/lib/:/var/lib/mysql/"
+      - "./volumes/mha_node2/conf/:/etc/mysql/conf.d/"
+    env_file:
+      - ./parameters.env
+    environment:
+      - CONTAINER_NAME=mha_node2
+
+  mha_manager:
+    image: mha4mysql-manager:latest
+    container_name: mha_manager
+    depends_on:
+      - mha_master
+      - mha_slave1
+      - mha_slave2
+    restart: always
+    networks:
+      net1:
+        ipv4_address: 10.5.0.9
+    volumes:
+      - "./volumes/mha_share/:/root/mha_share/"
+      - "./volumes/mha_manager/conf:/etc/mha"
+      - "./volumes/mha_manager/work:/usr/local/mha"
+    entrypoint: "tailf /dev/null"
+    env_file:
+      - ./parameters.env
+    environment:
+      - CONTAINER_NAME=mha_manager
+networks:
+  net1:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
