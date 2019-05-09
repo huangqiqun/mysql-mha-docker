@@ -22,8 +22,8 @@ $ cd mysql-mha-docker
 $ docker-compose up -d
 
 ```
-备注：    
-所有节点开机启动ssh
+
+2. 开机启动ssh
 
 ```cmd
 $ sh ./scripts/ssh_rc.sh 
