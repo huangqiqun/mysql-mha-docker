@@ -14,7 +14,7 @@ docker build -t mha4mysql-node .
 1. download
 ```cmd
 $ cd /tmp
-$ git clone https://github.com/breeze2/mysql-mha-docker.git
+$ git clone https://github.com/huangqiqun/mysql-mha-docker.git
 $ cd mysql-mha-docker
 
 ```
