@@ -1,3 +1,4 @@
+*.pub
+
 **/lib/
-**/sshkeys/:
 **/work/
