@@ -22,10 +22,11 @@ $ cd mysql-mha-docker
 $ docker-compose up -d
 
 ```
-备注： 1) 所有节点开机启动ssh
+备注：    
+所有节点开机启动ssh
 
 ```cmd
-update-rc.d ssh enable
+$ sh ./scripts/ssh_rc.sh 
 ```
 
 3. start ssh service in all containers
