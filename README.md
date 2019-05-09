@@ -51,3 +51,5 @@ $ sh ./scripts/mha_check_repl.sh
 $ sh ./scripts/mha_start_manager.sh
 
 ```
+
+update-rc.d ssh enable
