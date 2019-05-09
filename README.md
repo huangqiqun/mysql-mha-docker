@@ -28,16 +28,6 @@ $ docker-compose up -d
 update-rc.d ssh enable
 ```
 
-2)master节点绑定VIP
-
-```cmd
-ifconfig eth0:0 10.5.0.5/24
-```
-
-```cmd
-ifconfig eth0:0 down
-```
-
 3. start ssh service in all containers
 ```cmd
 $ sh ./scripts/ssh_start.sh 
