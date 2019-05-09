@@ -1,7 +1,7 @@
 FROM debian:jessie
 
-COPY ../mha4mysql-manager-0.58.tar.gz /tmp/
-COPY ../mha4mysql-node-0.58.tar.gz /tmp/
+COPY ./mha4mysql-manager-0.58.tar.gz /tmp/
+COPY ./mha4mysql-node-0.58.tar.gz /tmp/
 
 RUN build_deps='net-tools ssh sshpass perl libdbi-perl libmodule-install-perl libdbd-mysql-perl libconfig-tiny-perl liblog-dispatch-perl libparallel-forkmanager-perl make' \
     && apt-get update \
