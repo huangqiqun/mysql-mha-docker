@@ -16,6 +16,21 @@ $ cd mysql-mha-docker
 $ docker-compose up -d
 
 ```
+备注： 1) 所有节点开机启动ssh
+
+```cmd
+update-rc.d ssh enable
+```
+
+2)master节点绑定VIP
+
+```cmd
+ifconfig eth0:0 10.5.0.5/24
+```
+
+```cmd
+ifconfig eth0:0 down
+```
 
 3. start ssh service in all containers
 ```cmd
@@ -51,5 +66,3 @@ $ sh ./scripts/mha_check_repl.sh
 $ sh ./scripts/mha_start_manager.sh
 
 ```
-
-update-rc.d ssh enable
