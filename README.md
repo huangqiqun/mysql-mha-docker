@@ -2,9 +2,12 @@
 mysql mha docker compose
 
 ## Usage
+```cmd
 docker build -t mha4mysql-manager .
+```
+```cmd
 docker build -t mha4mysql-node .
-
+```
 
 1. download
 ```cmd
